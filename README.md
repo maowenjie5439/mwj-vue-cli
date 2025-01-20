@@ -1,25 +1,22 @@
-从0到1构建脚手架
+mwj-vue-cli
+📖简介
+用于快速搭建前端项目的命令行工具
+📕 模板
+✅ 快速生成 Vue3+TS+Vite+ElementPlus+Pinia+Axios+Mock的模板
+📦 安装
+npm install mwj-vue-cli -g
+🚩使用
+# 使用模板创建新项目
+mwj-vue-cli create 
 
-1. git init
+# 执行项目文件夹名称并选择模板创建新项目
+mwj-vue-cli create [projectName]
 
-2. npm init: 创建package.json文件
+# 更新脚手架到最新版本
+mwj-vue-cli update
 
-3. vue-tsc --init: 创建tsconfig.json文件
+# 查看脚手架版本
+mwj-vue-cli -v
 
-   > vue-tsc 是专门为 Vue 3 项目设计的 TypeScript 类型检查工具。
-   >
-   > ### 主要功能
-   >
-   > 类型检查
-   >
-   > ​	检查 .vue 文件中的 TypeScript 代码
-   >
-   > ​	检查模板语法中的类型错误
-   >
-   > ​	验证 props、emits 等 Vue 特定功能的类型
-   >
-   > 命令行工具
-   >
-   > ​	可以在构建过程中进行类型检查
-   >
-   > ​	支持与 VS Code 等编辑器集成，提供实时类型检查
+更新记录
+2025-01-21 更新脚手架版本到v1.0.0

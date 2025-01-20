@@ -8,6 +8,20 @@
     "build": "rollup -c rollup.config.js"
   },
   "author": "maowenjie",
+  "bin": {
+    "mwj-vue-cli": "./bin/index.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "vue3",
+    "vite",
+    "typescript",
+    "element-plus"
+  ],
   "license": "ISC",
   "description": "",
   "devDependencies": {
