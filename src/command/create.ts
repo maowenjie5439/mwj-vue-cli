@@ -3,6 +3,10 @@ import { gitClone } from "../utils/gitClone";
 import path from "path";
 import fs from "fs";
 import log from "../utils/log";
+import axios, { AxiosResponse } from "axios";
+import { name, version } from "../../package.json";
+import { gt } from "lodash";
+import chalk from "chalk";
 
 export type Template = {
     name: string; // 模板名称
@@ -50,13 +54,33 @@ export async function create(projectName: string) {
         });
         if (isCover) {
             fs.rmSync(projectPath, { recursive: true, force: true });
-        }else{
-            log.info(`已取消创建`)
+        } else {
+            log.info(`已取消创建`);
             return;
         }
     }
+
+    await checkVersion();
     // 克隆项目
     if (template) {
         gitClone(template.downloadUrl, projectName);
     }
 }
+
+const checkVersion = async () => {
+    const path = `https://registry.npmjs.org/${name}`;
+    const res = (await axios.get(path)) as AxiosResponse;
+    const latestVersion = res.data["dist-tags"].latest;
+    if (gt(latestVersion, version)) {
+        console.warn(
+            `检查到mwj-vue-cli最新版本： ${chalk.blueBright(
+                latestVersion
+            )}，当前版本是：${chalk.blackBright(version)}`
+        );
+        console.log(
+            `可使用： ${chalk.yellow(
+                "npm install mwj-vue-cli@latest"
+            )}，或者使用：${chalk.yellow("mwj-vue-cli update")}更新`
+        );
+    }
+};
