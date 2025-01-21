@@ -13,7 +13,7 @@ program
     .action(async (projectName) => {
         while (!projectName) {
             // console.log(`create ${projectName} project`)
-            projectName = await input({ message: "请输入项目名称: " });
+            projectName = await input({ message: "请输入项目名称:" });
         }
         create(projectName);
     });

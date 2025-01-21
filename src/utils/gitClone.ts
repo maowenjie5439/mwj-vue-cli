@@ -2,6 +2,7 @@ import { simpleGit, SimpleGitOptions } from "simple-git"
 import createLogger from "progress-estimator"
 import chalk from "chalk"
 import log from "./log"
+import { printBanner } from "./banner"
 
 const gitOptions: Partial<SimpleGitOptions> = {
   baseDir: process.cwd(), // 当前工作目录
@@ -20,7 +21,9 @@ const logger = createLogger({
     },
 });
 export const gitClone = async (downloadUrl: string, projectName: string, options: Record<string, any>={}) => {
-  const git = simpleGit(options)
+  // 打印banner
+  await printBanner()
+  const git = simpleGit(gitOptions)
   try {
     // 开始下载代码并展示预估时间进度条
     await logger(git.clone(downloadUrl, projectName, options), '代码下载中: ', {
@@ -29,9 +32,6 @@ export const gitClone = async (downloadUrl: string, projectName: string, options
 
     // 下面就是一些相关的提示
     console.log()
-    console.log(chalk.blueBright(`==================================`))
-    console.log(chalk.blueBright(`=== 欢迎使用 mwj-vue-cli 脚手架 ===`))
-    console.log(chalk.blueBright(`==================================`))
     console.log()
 
     log.success(`项目创建成功 ${chalk.blueBright(projectName)}`)

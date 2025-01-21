@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from "axios";
 import { name, version } from "../../package.json";
 import { gt } from "lodash";
 import chalk from "chalk";
+import { printBanner } from "../utils/banner";
 
 export type Template = {
     name: string; // 模板名称
@@ -63,7 +64,12 @@ export async function create(projectName: string) {
     await checkVersion();
     // 克隆项目
     if (template) {
-        gitClone(template.downloadUrl, projectName);
+        try {
+            await gitClone(template.downloadUrl, projectName);
+        } catch (error) {
+            log.error("下载失败");
+            log.error(String(error));
+        }
     }
 }
 
