@@ -11,7 +11,7 @@ const spinner = ora({
 });
 export function update() {
     spinner.start();
-    process.exec('npm install dawei-cli@latest -g', (error) => {
+    process.exec('npm install mwj-vue-cli@latest -g', (error) => {
         spinner.stop();
         if (!error) {
             console.log(chalk.green('更新成功'));
